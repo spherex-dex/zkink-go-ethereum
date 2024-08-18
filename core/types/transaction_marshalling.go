@@ -409,6 +409,37 @@ func (tx *Transaction) UnmarshalJSON(input []byte) error {
 			}
 		}
 
+	case DepositTxType:
+		var itx DepositTx
+		inner = &itx
+		if dec.Nonce == nil {
+			return errors.New("missing required field 'nonce' in transaction")
+		}
+		itx.Nonce = uint64(*dec.Nonce)
+		if dec.To != nil {
+			itx.To = dec.To
+		}
+		if dec.Gas == nil {
+			return errors.New("missing required field 'gas' in transaction")
+		}
+		itx.Gas = uint64(*dec.Gas)
+		if dec.GasPrice == nil {
+			return errors.New("missing required field 'gasPrice' in transaction")
+		}
+		itx.GasPrice = (*big.Int)(dec.GasPrice)
+		if dec.Value == nil {
+			return errors.New("missing required field 'value' in transaction")
+		}
+		itx.Value = (*big.Int)(dec.Value)
+		if dec.Input == nil {
+			return errors.New("missing required field 'input' in transaction")
+		}
+		itx.Data = *dec.Input
+
+		itx.R = common.Big0
+		itx.S = common.Big0
+		itx.V = common.Big0
+
 	default:
 		return ErrTxTypeNotSupported
 	}
