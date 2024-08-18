@@ -69,7 +69,7 @@ func (tx *DepositTx) copy() TxData {
 }
 
 // accessors for innerTx.
-func (tx *DepositTx) txType() byte           { return LegacyTxType }
+func (tx *DepositTx) txType() byte           { return DepositTxType }
 func (tx *DepositTx) chainID() *big.Int      { return deriveChainId(tx.V) }
 func (tx *DepositTx) accessList() AccessList { return nil }
 func (tx *DepositTx) data() []byte           { return tx.Data }
