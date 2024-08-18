@@ -137,10 +137,6 @@ func Sender(signer Signer, tx *Transaction) (common.Address, error) {
 		}
 	}
 
-	if tx.inner.(*DepositTx).txType() == DepositTxType {
-		return common.Address{}, nil
-	}
-
 	depositTx, ok := tx.inner.(*DepositTx)
 	if ok && depositTx.txType() == DepositTxType {
 		return common.Address{}, nil
