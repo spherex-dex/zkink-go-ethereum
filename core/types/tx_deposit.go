@@ -23,8 +23,6 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
-const DepositTxType = 0xFF
-
 // LegacyTx is the transaction data of the original Ethereum transactions.
 type DepositTx struct {
 	Nonce    uint64          // nonce of sender account
