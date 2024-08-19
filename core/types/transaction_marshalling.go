@@ -409,7 +409,7 @@ func (tx *Transaction) UnmarshalJSON(input []byte) error {
 			}
 		}
 
-	case DepositTxType:
+	default:
 		var itx DepositTx
 		inner = &itx
 		if dec.Nonce == nil {
@@ -440,8 +440,8 @@ func (tx *Transaction) UnmarshalJSON(input []byte) error {
 		itx.S = common.Big0
 		itx.V = common.Big0
 
-	default:
-		return ErrTxTypeNotSupported
+		// default:
+		// 	return ErrTxTypeNotSupported
 	}
 
 	// Now set the inner transaction.
